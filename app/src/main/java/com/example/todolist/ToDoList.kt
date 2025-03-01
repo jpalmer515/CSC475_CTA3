@@ -69,8 +69,8 @@ fun ToDoList(viewModel : ToDoListView) {
                     itemsIndexed(it) {index: Int, item: ToDoItems ->
                         ToDoObjects(
                             toDoEntry = item,
-                            onDelete = { viewModel.deleteToDoItem(item.toDoId) },
-                            onClick = { viewModel.checkToDoItem(item.toDoId) },
+                            onDelete = { viewModel.deleteToDoItem(index) },
+                            onClick = { viewModel.checkToDoItem(index) },
                         )
                     }
                 }

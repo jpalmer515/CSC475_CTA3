@@ -17,12 +17,12 @@ object ToDoListManager {
         toDoListData.add(ToDoItems(System.currentTimeMillis().toInt(),title, Date.from(Instant.now()), checkedState = false))
     }
 
-    fun checkToDoItem(id: Int) {
-        toDoListData.find { it.toDoId==id }?.let { it.checkedState = !it.checkedState }
+    fun checkToDoItem(index: Int) {
+        toDoListData[index] = toDoListData[index].copy(checkedState = !toDoListData[index].checkedState)
     }
 
-    fun deleteToDoItem(id: Int) {
-        toDoListData.removeIf{ it.toDoId==id }
+    fun deleteToDoItem(index: Int) {
+        toDoListData.removeAt(index)
     }
 
 }
