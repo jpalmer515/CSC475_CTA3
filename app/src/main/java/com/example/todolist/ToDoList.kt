@@ -32,6 +32,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -48,6 +51,7 @@ fun ToDoList(viewModel : ToDoListView) {
 
     Column(
         modifier = Modifier
+            .paint(painterResource(id = R.drawable.ic_banner_foreground))
             .fillMaxHeight()
             .padding(8.dp)
             .verticalScroll( rememberScrollState() ),
@@ -66,7 +70,9 @@ fun ToDoList(viewModel : ToDoListView) {
         }
         firstToDoTest?.let {
             LazyColumn(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(8.dp))
+                    .weight(1f),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 userScrollEnabled = true,
@@ -94,7 +100,7 @@ fun ToDoObjects(toDoEntry: ToDoItems, onDelete : ()-> Unit, onClick : ()-> Unit,
             .fillMaxWidth()
             .padding(8.dp)
             .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.primary)
+            .background(color = Color(51, 153, 255))
             .padding(8.dp)
             .toggleable(
                 value = toDoEntry.checkedState,
@@ -109,7 +115,8 @@ fun ToDoObjects(toDoEntry: ToDoItems, onDelete : ()-> Unit, onClick : ()-> Unit,
             onCheckedChange = null,
         )
         Column(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
         ) {
             Text(text = SimpleDateFormat("HH:mm:ss, dd MMM yyyy", Locale.ENGLISH).format(toDoEntry.createdTime))
             Text(text = toDoEntry.toDoTitle)
