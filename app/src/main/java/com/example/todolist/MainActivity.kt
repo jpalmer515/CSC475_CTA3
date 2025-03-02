@@ -16,6 +16,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Surface
 import androidx.lifecycle.ViewModelProvider
 
+val dbManager = DataBaseOps(this)
+val newRowId = dbManager.addData()
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
