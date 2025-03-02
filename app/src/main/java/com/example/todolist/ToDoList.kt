@@ -36,6 +36,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.viewModelFactory
+import java.sql.RowId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -70,11 +71,14 @@ fun ToDoList(viewModel : ToDoListView) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 userScrollEnabled = true,
                 content = {
-                    itemsIndexed(it) {index: Int, item: ToDoItems ->
+                    itemsIndexed(it) {
+                        index: Int,
+                        item: ToDoItems ->
                         ToDoObjects(
                             toDoEntry = item,
                             onDelete = { viewModel.deleteToDoItem(index) },
                             onClick = { viewModel.checkToDoItem(index) },
+                            //newRowId = item,
                         )
                     }
                 }
@@ -84,7 +88,7 @@ fun ToDoList(viewModel : ToDoListView) {
 }
 
 @Composable
-fun ToDoObjects(toDoEntry: ToDoItems, onDelete : ()-> Unit, onClick : ()-> Unit ) {
+fun ToDoObjects(toDoEntry: ToDoItems, onDelete : ()-> Unit, onClick : ()-> Unit, /*newRowId: RowId*/ ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
